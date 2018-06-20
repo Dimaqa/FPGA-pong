@@ -112,10 +112,10 @@ wire ball = ball_inX & ball_inY;
 
 //define bounces
 reg CollisionX1, CollisionX2, CollisionY1, CollisionY2;
-always @(posedge VGA_CLK) if(nextpos | over) CollisionX1<=0; else if(BouncingObject & (CounterX==ballX   ) & (CounterY==ballY+ 8)) CollisionX1<=1;
-always @(posedge VGA_CLK) if(nextpos | over) CollisionX2<=0; else if(BouncingObject & (CounterX==ballX+16) & (CounterY==ballY+ 8)) CollisionX2<=1;
-always @(posedge VGA_CLK) if(nextpos | over) CollisionY1<=0; else if(BouncingObject & (CounterX==ballX+ 8) & (CounterY==ballY   )) CollisionY1<=1;
-always @(posedge VGA_CLK) if(nextpos | over) CollisionY2<=0; else if(BouncingObject & (CounterX==ballX+ 8) & (CounterY==ballY+16)) CollisionY2<=1;
+always @(posedge CLOCK_50) if(nextpos | over) CollisionX1<=0; else if(BouncingObject & (CounterX==ballX   ) & (CounterY==ballY+ 8)) CollisionX1<=1;
+always @(posedge CLOCK_50) if(nextpos | over) CollisionX2<=0; else if(BouncingObject & (CounterX==ballX+16) & (CounterY==ballY+ 8)) CollisionX2<=1;
+always @(posedge CLOCK_50) if(nextpos | over) CollisionY1<=0; else if(BouncingObject & (CounterX==ballX+ 8) & (CounterY==ballY   )) CollisionY1<=1;
+always @(posedge CLOCK_50) if(nextpos | over) CollisionY2<=0; else if(BouncingObject & (CounterX==ballX+ 8) & (CounterY==ballY+16)) CollisionY2<=1;
 //
 
 reg ball_dirX, ball_dirY;
@@ -134,7 +134,7 @@ begin
 		begin
 			if(~(CollisionX1 & CollisionX2))       
 			begin
-			if(CollisionY2) //&& ballX+boost < 9'b1001111000 && ballX-boost > 3'b111 )
+			if(CollisionY2) //&& ballX+boost < 9'b1001111000 && ballX-boost > 3'b111 ) 
 				ballX <= ballX + (ball_dirX ? -boost : boost);
 			else
 				ballX <= ballX + (ball_dirX ? -1 : 1);
